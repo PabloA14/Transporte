@@ -17,6 +17,7 @@ class Server {
         this.app = express()
         this.middlewares()
         this.routes()
+        this.conecarBaseDatos()
     }
 
     routes() {
@@ -32,14 +33,20 @@ class Server {
         this.app.use(express.json())
         this.app.use(cors())
     }
+
+    conecarBaseDatos(){
+        mongoose.connect(process.env.MONGODB)
+        .then(() => console.log('Connected!'));
+    }
+    
     escuchar() {
         this.app.listen(process.env.PORT, () => {
             console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
         })
     }
+
 }
 
-mongoose.connect('mongodb://127.0.0.1:27017/test')
-    .then(() => console.log('Connected!'));
+
 
 export default Server
