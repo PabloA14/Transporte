@@ -2,7 +2,7 @@ import Chofer from "../models/choferes.js"
 
 const httpChoferes = {
     getChoferes: async (req, res) => {
-        const chofer = await Chofer.find()
+        const chofer = await Chofer.find().populate("chofer_id")
         res.json({ chofer })
     },
 
