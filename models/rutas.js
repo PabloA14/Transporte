@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const rutasSchema = new mongoose.Schema({
+    nombre: { type: String, required: true },
     origen: { type: String, required: true },
     destino: { type: String, required: true },
     valor_pasage: { type: Number, required: true, default: 0 },

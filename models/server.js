@@ -9,9 +9,6 @@ import mongoose from "mongoose"
 import cors from "cors"
 
 
-
-
-
 class Server {
     constructor() {
         this.app = express()
@@ -26,7 +23,7 @@ class Server {
         this.app.use('/api/choferes', choferes)
         this.app.use('/api/vehiculos', vehiculos)
         this.app.use('/api/rutas', rutas)
-        this.app.use('/api/rutas', tiketes)
+        this.app.use('/api/tiketes', tiketes)
     }
 
     middlewares() {

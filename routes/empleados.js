@@ -16,5 +16,7 @@ router.post("/", [
     check("clave", "la clave es obligatoria").notEmpty().trim()
 ], httpEmpleados.postEmpleado)
 
+router.get("/:cedula", httpEmpleados.getCedula);
+
 
 export default router
