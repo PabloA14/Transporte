@@ -22,8 +22,8 @@ const httpRutas = {
     },
 
     postRuta: async (req, res) => {
-        const { nombre, origen, destino, valor_pasage } = req.body
-        const ruta = await Ruta({ nombre, origen, destino, valor_pasage })
+        const { nombre, origen, destino, valor_pasage, estado } = req.body
+        const ruta = await Ruta({ nombre, origen, destino, valor_pasage, estado })
         await ruta.save()
         res.json({ ruta })
     }

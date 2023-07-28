@@ -5,6 +5,7 @@ const rutasSchema = new mongoose.Schema({
     origen: { type: String, required: true },
     destino: { type: String, required: true },
     valor_pasage: { type: Number, required: true, default: 0 },
+    estado: { type: Number, default: 1, required: true },
     createdAt: { type: Date, default: Date.now },
 })
 

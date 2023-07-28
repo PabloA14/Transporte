@@ -25,8 +25,8 @@ const httpChoferes = {
     },
 
     postChofer: async (req, res) => {
-        const { cedula, nombre, telefono, numero_licencia, categoria_licencia, fecha_vencimiento, experiencia } = req.body
-        const chofer = await Chofer({ cedula, nombre, telefono, numero_licencia, categoria_licencia, fecha_vencimiento, experiencia })
+        const { cedula, nombre, telefono, numero_licencia, categoria_licencia, fecha_vencimiento, experiencia, estado } = req.body
+        const chofer = await Chofer({ cedula, nombre, telefono, numero_licencia, categoria_licencia, fecha_vencimiento, experiencia, estado })
         await chofer.save()
         res.json({ chofer })
     },

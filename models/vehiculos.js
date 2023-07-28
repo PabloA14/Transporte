@@ -7,6 +7,7 @@ const vehiculoSchema = new mongoose.Schema({
     marca: { type: String, required: false },
     modelo: { type: String, required: false },
     capacidad: { type: Number, required: true },
+    estado: { type: Number, default: 1},
     createdAt: { type: Date, default: Date.now },
 })
 

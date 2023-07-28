@@ -26,8 +26,8 @@ const httpPasajeros = {
     },
 
     postPasajero: async (req, res) => {
-        const { cedula, nombre, telefono } = req.body
-        const pasajero = await Pasajero({ cedula, nombre, telefono })
+        const { cedula, nombre, telefono, estado } = req.body
+        const pasajero = await Pasajero({ cedula, nombre, telefono, estado })
         await pasajero.save()
         res.json({ pasajero })
     }

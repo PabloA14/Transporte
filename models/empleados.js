@@ -6,6 +6,7 @@ const empleadoSchema = new mongoose.Schema({
     telefono: { type: String, required: true },
     username: { type: String, required: true },
     clave: { type: String, required: true },
+    estado: { type: Number, default: 1,required: true },
     createdAt: { type: Date, default: Date.now },
 })
 

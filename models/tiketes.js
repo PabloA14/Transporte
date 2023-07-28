@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
 const tiketeSchema = new mongoose.Schema({
+    id: { type: String, required: false },
     veiculo_matericula: { type: mongoose.Schema.Types.String, ref: 'Vehiculo', required: true },
-    cedula_empleado: { type: mongoose.Schema.Types.String, ref: 'Persona', required: true },
-    cedula_pasagero: { type: mongoose.Schema.Types.String, ref: 'Persona', required: true },
+    cedula_empleado: { type: mongoose.Schema.Types.String, ref: 'Empleado', required: true },
+    cedula_pasajero: { type: mongoose.Schema.Types.String, ref: 'Pasajero', required: true },
     num_acientos: { type: Number, default: 0 },
     fecha_salida: { type: Date, required: true },
     hora_salida: { type: Date, required: true },
     tipo_pago: { type: String, required: false },
     ruta: { type: mongoose.Schema.Types.String, ref: 'Ruta', required: true },
+    estado: { type: Number, default: 1, required: true },
     createdAt: { type: Date, default: Date.now },
 })
 

@@ -26,8 +26,8 @@ const httpVehiculos = {
     },
 
     postVehiculo: async (req, res) => {
-        const { matricula, chofer_nombre, tipo, marca, modelo, capacidad } = req.body
-        const vehiculo = await Vehiculo({ matricula, chofer_nombre, tipo, marca, modelo, capacidad })
+        const { matricula, chofer_nombre, tipo, marca, modelo, capacidad, estado } = req.body
+        const vehiculo = await Vehiculo({ matricula, chofer_nombre, tipo, marca, modelo, capacidad, estado })
         await vehiculo.save()
         res.json({ vehiculo })
     }

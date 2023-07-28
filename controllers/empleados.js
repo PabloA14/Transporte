@@ -26,8 +26,8 @@ const httpEmpleados = {
     },
 
     postEmpleado: async (req, res) => {
-        const { cedula, nombre, telefono, username, clave } = req.body
-        const empleado = await Empleado({ cedula, nombre, telefono, username, clave })
+        const { cedula, nombre, telefono, username, clave, estado } = req.body
+        const empleado = await Empleado({ cedula, nombre, telefono, username, clave, estado })
         await empleado.save()
         res.json({ empleado })
     },
