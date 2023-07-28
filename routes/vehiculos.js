@@ -5,6 +5,7 @@ import { check } from "express-validator"
 const router = Router()
 
 router.get("/", httpVehiculos.getVehiculos)
+router.get("/:matricula", httpVehiculos.getMatricula);
 
 router.post("/",[
     check("matricula", "la matricula es obligatoria").notEmpty().isString().trim(),

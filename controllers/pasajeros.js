@@ -29,7 +29,7 @@ const httpPasajeros = {
         const { cedula, nombre, telefono } = req.body
         const pasajero = await Pasajero({ cedula, nombre, telefono })
         await pasajero.save()
-        res.json({pasajero})
+        res.json({ pasajero })
     }
 }
 

@@ -29,12 +29,12 @@ const httpEmpleados = {
         const { cedula, nombre, telefono, username, clave } = req.body
         const empleado = await Empleado({ cedula, nombre, telefono, username, clave })
         await empleado.save()
-        res.json({empleado})
+        res.json({ empleado })
     },
 
-    
 
-    
+
+
 
 }
 
