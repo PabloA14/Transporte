@@ -12,4 +12,4 @@ const choferSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now }, 
 })
 
-export default mongoose.model ("Chofer", choferSchema) 
+export default mongoose.model ("Chofer", choferSchema)
