@@ -15,5 +15,7 @@ router.post("/", [
 ], httpPasajeros.postPasajero)
 
 router.get("/:cedula", httpPasajeros.getCedula);
+router.put('/:id', httpPasajeros.putPasajero);
+
 
 export default router

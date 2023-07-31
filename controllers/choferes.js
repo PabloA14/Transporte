@@ -26,6 +26,26 @@ const httpChoferes = {
       res.status(500).json({ mensaje: 'Hubo un error al buscar el chofer.' });
     }
   },
+  putChofer: async (req, res) => {
+    const choferId = req.params.id;
+    const newData = req.body;
+
+    try {
+      const choferExistente = await Chofer.findById(choferId);
+      if (!choferExistente) {
+        return res.status(404).json({ mensaje: 'No se encontró el chofer con el ID proporcionado.' });
+      }
+
+      await Chofer.findByIdAndUpdate(choferId, newData);
+
+      const choferActualizado = await Chofer.findById(choferId);
+      res.json({ chofer: choferActualizado });
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al actualizar el chofer.' });
+    }
+  },
 };
 
 export default httpChoferes;

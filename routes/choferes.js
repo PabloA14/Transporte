@@ -19,4 +19,7 @@ router.post("/", [
     check("experiencia", "los años de experiencia son obligatorios").notEmpty().trim()
 ], httpChoferes.postChofer)
 
+router.put('/:id', httpChoferes.putChofer);
+
+
 export default router
