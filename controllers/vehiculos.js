@@ -14,7 +14,7 @@ const httpVehiculos = {
             const vehiculoEncontrado = await Vehiculo.findOne({ matricula: matriculaBuscada });
             if (!vehiculoEncontrado) {
                 // Si no se encontró el vehiculo con la cédula dada, devolver un mensaje de error o un estado 404 Not Found.
-                return res.status(404).json({ mensaje: 'No se encontró el vehiculo con la cédula proporcionada.' });
+                return res.status(404).json({ mensaje: 'No se encontró el vehiculo con la matrícula proporcionada.' });
             }
             // Si se encontró el vehiculo, devuelve la información del mismo en la respuesta.
             res.json(vehiculoEncontrado);
