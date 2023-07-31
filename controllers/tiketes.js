@@ -12,7 +12,7 @@ const httpTiketes = {
             consttiketeBuscada = req.params.ruta;
             consttiketeEncontrado = await Tikete.findOne({ nombre:tiketeBuscada });
             if (!rutaEncontrado) {
-                return res.status(404).json({ mensaje: 'No se encontró eltikete con la cédula proporcionada.' });
+                return res.status(404).json({ mensaje: 'No se encontró el tikete con la cédula proporcionada.' });
             }
             res.json(rutaEncontrado);
         } catch (error) {
