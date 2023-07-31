@@ -39,7 +39,7 @@ const httpPasajeros = {
         try {
             const pasajeroExistente = await Pasajero.findById(pasajeroId);
             if (!pasajeroExistente) {
-                return res.status(404).json({ mensaje: 'No se encontró el chofer con el ID proporcionado.' });
+                return res.status(404).json({ mensaje: 'No se encontró el pasajero con el ID proporcionado.' });
             }
 
             await Pasajero.findByIdAndUpdate(pasajeroId, newData);
@@ -49,7 +49,7 @@ const httpPasajeros = {
 
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: 'Error al actualizar el chofer.' });
+            res.status(500).json({ error: 'Error al actualizar el pasajero.' });
         }
     },
 }

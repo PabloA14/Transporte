@@ -31,7 +31,7 @@ const httpRutas = {
         try {
             const rutaExistente = await Ruta.findById(rutaId);
             if (!rutaExistente) {
-                return res.status(404).json({ mensaje: 'No se encontró el chofer con el ID proporcionado.' });
+                return res.status(404).json({ mensaje: 'No se encontró la ruta con el ID proporcionado.' });
             }
 
             await Ruta.findByIdAndUpdate(rutaId, newData);
@@ -41,7 +41,7 @@ const httpRutas = {
 
         } catch (error) {
             console.error(error);
-            res.status(500).json({ error: 'Error al actualizar el chofer.' });
+            res.status(500).json({ error: 'Error al actualizar la ruta.' });
         }
     },
 
