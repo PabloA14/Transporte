@@ -5,7 +5,7 @@ import { check } from "express-validator"
 const router = Router()
 
 router.get("/", httpChoferes.getChoferes)
-router.get("/:cedula", httpChoferes.getCedula)
+router.get("/:cedula", httpChoferes.getCedulaChofer)
 
 router.post("/", [
     check("cedula", "la cédula es obligatoria").notEmpty().isString().trim(),
@@ -18,5 +18,8 @@ router.post("/", [
     check("fecha_vencimiento", "la fecha de vencimiento es obligatoria").notEmpty().trim(),
     check("experiencia", "los años de experiencia son obligatorios").notEmpty().trim()
 ], httpChoferes.postChofer)
+
+router.put('/:id', httpChoferes.putChofer);
+
 
 export default router

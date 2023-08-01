@@ -26,11 +26,32 @@ const httpPasajeros = {
     },
 
     postPasajero: async (req, res) => {
-        const { cedula, nombre, telefono, estado } = req.body
-        const pasajero = await Pasajero({ cedula, nombre, telefono, estado })
+        const { cedula, nombre, telefono } = req.body
+        const pasajero = await Pasajero({ cedula, nombre, telefono })
         await pasajero.save()
         res.json({ pasajero })
-    }
+    },
+
+    putPasajero: async (req, res) => {
+        const pasajeroId = req.params.id;
+        const newData = req.body;
+
+        try {
+            const pasajeroExistente = await Pasajero.findById(pasajeroId);
+            if (!pasajeroExistente) {
+                return res.status(404).json({ mensaje: 'No se encontró el pasajero con el ID proporcionado.' });
+            }
+
+            await Pasajero.findByIdAndUpdate(pasajeroId, newData);
+
+            const pasajeroActualizado = await Pasajero.findById(pasajeroId);
+            res.json({ pasajero: pasajeroActualizado });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error al actualizar el pasajero.' });
+        }
+    },
 }
 
 export default httpPasajeros

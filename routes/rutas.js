@@ -5,7 +5,6 @@ import { check } from "express-validator"
 const router = Router()
 
 router.get("/", httpRutas.getRutas)
-router.get("/:ruta", httpRutas.getRuta);
 
 router.post("/",[
     check("nombre", "el nombre es obligatorio").notEmpty().isString().trim(),
@@ -13,5 +12,9 @@ router.post("/",[
     check("destino", "el destino es obligatorio").notEmpty().trim(),
     check("valor", "el valor es obligatorio").notEmpty().trim(),
 ], httpRutas.postRuta)
+
+router.get("/:nombre", httpRutas.getNombreRuta);
+router.put('/:id', httpRutas.putRuta);
+
 
 export default router

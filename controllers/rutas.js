@@ -5,28 +5,45 @@ const httpRutas = {
         const ruta = await Ruta.find()
         res.json({ ruta })
     },
-
-
-    getRuta: async (req, res) => {
+    getNombreRuta: async (req, res) => {
         try {
-            const rutaBuscada = req.params.ruta;
-            const rutaEncontrado = await Ruta.findOne({ nombre: rutaBuscada });
-            if (!rutaEncontrado) {
-                return res.status(404).json({ mensaje: 'No se encontró el ruta con la cédula proporcionada.' });
+            const nombreBuscado = req.params.nombre;
+            const rutaEncontrada = await Ruta.findOne({ nombre: nombreBuscado });
+            if (!rutaEncontrada) {
+                return res.status(404).json({ mensaje: 'No se encontró la ruta con el nombre proporcionada.' });
             }
-            res.json(rutaEncontrado);
+            res.json(rutaEncontrada);
         } catch (error) {
-            console.error('Error al buscar el ruta:', error);
-            res.status(500).json({ mensaje: 'Hubo un error al buscar el ruta.' });
+            console.error('Error al buscar el chofer:', error);
+            res.status(500).json({ mensaje: 'Hubo un error al buscar la ruta.' });
         }
     },
-
     postRuta: async (req, res) => {
-        const { nombre, origen, destino, valor_pasage, estado } = req.body
-        const ruta = await Ruta({ nombre, origen, destino, valor_pasage, estado })
+        const { nombre, origen, destino, valor } = req.body
+        const ruta = await Ruta({ nombre, origen, destino, valor })
         await ruta.save()
         res.json({ ruta })
-    }
+    },
+    putRuta: async (req, res) => {
+        const rutaId = req.params.id;
+        const newData = req.body;
+
+        try {
+            const rutaExistente = await Ruta.findById(rutaId);
+            if (!rutaExistente) {
+                return res.status(404).json({ mensaje: 'No se encontró la ruta con el ID proporcionado.' });
+            }
+
+            await Ruta.findByIdAndUpdate(rutaId, newData);
+
+            const rutaActualizada = await Ruta.findById(rutaId);
+            res.json({ ruta: rutaActualizada });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error al actualizar la ruta.' });
+        }
+    },
 
 }
 

@@ -5,7 +5,6 @@ import { check } from "express-validator"
 const router = Router()
 
 router.get("/", httpPasajeros.getPasajeros)
-router.get("/:cedula", httpPasajeros.getCedula);
 
 router.post("/", [
     check("cedula", "la cédula es obligatoria").notEmpty().isString().trim(),
@@ -14,6 +13,9 @@ router.post("/", [
     check("telefono", "el telefono es obligatorio").notEmpty().trim(),
     check("telefono", "telefono de máximo 12 caracteres").isLength({ max: 12 }),
 ], httpPasajeros.postPasajero)
+
+router.get("/:cedula", httpPasajeros.getCedula);
+router.put('/:id', httpPasajeros.putPasajero);
 
 
 export default router

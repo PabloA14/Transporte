@@ -1,5 +1,5 @@
 import Empleado from "../models/empleados.js"
-
+import bcrypt from "bcrypt"
 
 const httpEmpleados = {
     getEmpleados: async (req, res) => {
@@ -7,34 +7,65 @@ const httpEmpleados = {
         res.json({ empleado })
     },
 
-    getCedula: async (req, res) => {
+    getCedulaEmpleado: async (req, res) => {
         try {
             const cedulaBuscada = req.params.cedula;
-            // Realiza la búsqueda del pasajero en la base de datos utilizando el modelo
             const empleadoEncontrado = await Empleado.findOne({ cedula: cedulaBuscada });
             if (!empleadoEncontrado) {
-                // Si no se encontró el empleado con la cédula dada, devolver un mensaje de error o un estado 404 Not Found.
                 return res.status(404).json({ mensaje: 'No se encontró el empleado con la cédula proporcionada.' });
             }
-            // Si se encontró el empleado, devuelve la información del mismo en la respuesta.
             res.json(empleadoEncontrado);
         } catch (error) {
-            // Manejo de errores en caso de que algo falle.
             console.error('Error al buscar el empleado:', error);
             res.status(500).json({ mensaje: 'Hubo un error al buscar el empleado.' });
         }
     },
 
     postEmpleado: async (req, res) => {
-        const { cedula, nombre, telefono, username, clave, estado } = req.body
-        const empleado = await Empleado({ cedula, nombre, telefono, username, clave, estado })
-        await empleado.save()
-        res.json({ empleado })
+        const { cedula, nombre, telefono, username, clave } = req.body;
+        try {
+            const salt = 10;
+            const hashedClave = await bcrypt.hash(clave, salt);
+
+            const empleado = await Empleado({ cedula, nombre, telefono, username, clave: hashedClave });
+            await empleado.save();
+            res.json({ empleado });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error al crear el empleado' });
+        }
     },
+    putEmpleado: async (req, res) => {
+        const empleadoId = req.params.id; // Obtener el ID del empleado desde los parámetros de la solicitud
+        const newData = req.body; // Obtener los datos actualizados desde el cuerpo de la solicitud
 
+        try {
+            // Verificar si el empleado existe en la base de datos
+            const empleadoExistente = await Empleado.findById(empleadoId);
+            if (!empleadoExistente) {
+                return res.status(404).json({ mensaje: 'No se encontró el empleado con el ID proporcionado.' });
+            }
 
+            // Si se proporcionó una nueva contraseña, hashearla antes de actualizarla
+            if (newData.clave) {
+                const salt = 10;
+                const hashedClave = await bcrypt.hash(newData.clave, salt);
+                newData.clave = hashedClave;
+            }
 
+            // Actualizar los datos del empleado con los nuevos datos proporcionados
+            await Empleado.findByIdAndUpdate(empleadoId, newData);
 
+            // Obtener el empleado actualizado
+            const empleadoActualizado = await Empleado.findById(empleadoId);
+            res.json({ empleado: empleadoActualizado });
+
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error al actualizar el empleado.' });
+        }
+    },
 
 }
 
