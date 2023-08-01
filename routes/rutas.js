@@ -6,7 +6,7 @@ const router = Router()
 
 router.get("/", httpRutas.getRutas)
 
-router.post("/",[
+router.post("/", [
     check("nombre", "el nombre es obligatorio").notEmpty().isString().trim(),
     check("origen", "el origen es obligatorio").notEmpty().isString().trim(),
     check("destino", "el destino es obligatorio").notEmpty().trim(),

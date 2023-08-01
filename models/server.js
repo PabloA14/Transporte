@@ -31,11 +31,11 @@ class Server {
         this.app.use(cors())
     }
 
-    conecarBaseDatos(){
+    conecarBaseDatos() {
         mongoose.connect(process.env.MONGODB)
-        .then(() => console.log('Connected!'));
+            .then(() => console.log('Connected!'));
     }
-    
+
     escuchar() {
         this.app.listen(process.env.PORT, () => {
             console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);

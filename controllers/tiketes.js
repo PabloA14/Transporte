@@ -10,7 +10,7 @@ const httpTiketes = {
     getTikete: async (req, res) => {
         try {
             consttiketeBuscada = req.params.ruta;
-            consttiketeEncontrado = await Tikete.findOne({ nombre:tiketeBuscada });
+            consttiketeEncontrado = await Tikete.findOne({ nombre: tiketeBuscada });
             if (!rutaEncontrado) {
                 return res.status(404).json({ mensaje: 'No se encontró el tikete con la cédula proporcionada.' });
             }
@@ -25,7 +25,7 @@ const httpTiketes = {
         const { id, veiculo_matericula, cedula_empleado, cedula_pasagero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta } = req.body
         const tikete = await Tikete({ id, veiculo_matericula, cedula_empleado, cedula_pasagero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta })
         await tikete.save()
-        res.json({tikete})
+        res.json({ tikete })
     }
 
 }
