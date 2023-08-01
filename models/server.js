@@ -4,7 +4,7 @@ import empleados from "../routes/empleados.js"
 import pasajeros from "../routes/pasajeros.js"
 import rutas from "../routes/rutas.js"
 import vehiculos from "../routes/vehiculos.js"
-import tiketes from "../routes/rutas.js"
+import tiketes from "../routes/tiketes.js"
 import mongoose from "mongoose"
 import cors from "cors"
 
