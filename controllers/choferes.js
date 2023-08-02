@@ -46,6 +46,26 @@ const httpChoferes = {
             res.status(500).json({ error: 'Error al actualizar el chofer.' });
         }
     },
+    patchChofer: async (req, res) => {
+        const id = req.params.id
+        const { estado } = req.body
+    
+        try {
+          const chofer = await Chofer.findById(id)
+    
+          if (chofer) {
+            chofer.estado = estado
+            await chofer.save()
+            res.json(chofer)
+            
+          } else {
+            console.log("Id no encontrado");
+          }
+    
+        } catch (error) {
+          console.error(error);
+        }
+      }
 };
 
 export default httpChoferes;

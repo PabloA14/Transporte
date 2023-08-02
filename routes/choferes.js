@@ -20,6 +20,7 @@ router.post("/", [
 ], httpChoferes.postChofer)
 
 router.put('/:id', httpChoferes.putChofer);
+router.patch('/:id',httpChoferes.patchChofer)
 
 
 export default router
