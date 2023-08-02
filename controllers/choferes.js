@@ -49,6 +49,7 @@ const httpChoferes = {
     patchChofer: async (req, res) => {
         const id = req.params.id
         const { estado } = req.body
+        //patch
     
         try {
           const chofer = await Chofer.findById(id)
