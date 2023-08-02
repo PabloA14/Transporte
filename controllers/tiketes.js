@@ -4,6 +4,10 @@ const httpTiketes = {
 
     getTiketes: async (req, res) => {
         const tikete = await Tikete.find()
+        .populate("cedula_pasajero")
+        .populate("empleado")
+        .populate("veiculo_matericula")
+        .populate("ruta")
         res.json({ tikete })
     },
 
@@ -17,7 +21,7 @@ const httpTiketes = {
             res.json(rutaEncontrado);
         } catch (error) {
             console.error('Error al buscar eltikete:', error);
-            res.status(500).json({ mensaje: 'Hubo un error al buscar eltikete.' });
+            res.status(500).json({ mensaje: 'Hubo un error al buscar eltikete.' })
         }
     },
 
