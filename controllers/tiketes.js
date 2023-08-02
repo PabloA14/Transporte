@@ -22,8 +22,8 @@ const httpTiketes = {
     },
 
     postTikete: async (req, res) => {
-        const { id, veiculo_matericula, cedula_empleado, cedula_pasagero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta } = req.body
-        const tikete = await Tikete({ id, veiculo_matericula, cedula_empleado, cedula_pasagero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta })
+        const { id, veiculo_matericula, empleado, cedula_pasajero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta, estado } = req.body
+        const tikete = await Tikete({ id, veiculo_matericula, empleado, cedula_pasajero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta, estado })
         await tikete.save()
         res.json({ tikete })
     }
