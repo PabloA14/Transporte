@@ -3,7 +3,7 @@ import Vehiculo from "../models/vehiculos.js";
 const httpVehiculos = {
 
     getVehiculos: async (req, res) => {
-        const vehiculo = await Vehiculo.find()
+        const vehiculo = await Vehiculo.find().populate("chofer")
         res.json({ vehiculo })
     },
 
