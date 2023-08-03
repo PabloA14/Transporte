@@ -12,4 +12,6 @@ router.post("/", [
 
 ], httpTiketes.postTikete)
 
+router.put('/:id', httpTiketes.puttikete)
+
 export default router

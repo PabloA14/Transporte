@@ -21,7 +21,7 @@ const httplogin = {
         try {
             const loginExistente = await Login.findById(loginId);
             if (!loginExistente) {
-                return res.status(404).json({ mensaje: 'No se encontró el pasajero con el ID proporcionado' });
+                return res.status(404).json({ mensaje: 'No se encontró el usuario o clave con el ID proporcionado' });
             }
 
             await Login.findByIdAndUpdate(loginId, newData);
