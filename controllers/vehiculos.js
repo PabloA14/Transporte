@@ -24,7 +24,6 @@ const httpVehiculos = {
             res.status(500).json({ mensaje: 'Hubo un error al buscar el vehiculo.' });
         }
     },
-
     postVehiculo: async (req, res) => {
         const { matricula, chofer_id, tipo, marca, modelo, capacidad, estado } = req.body
         const vehiculo = await Vehiculo({ matricula, chofer_id, tipo, marca, modelo, capacidad, estado })
@@ -70,7 +69,6 @@ const httpVehiculos = {
             res.status(500).json({ error: 'Error al actualizar el vehículo.' });
         }
     }
-
 }
 
 export default httpVehiculos
