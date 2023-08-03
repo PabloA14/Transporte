@@ -11,4 +11,6 @@ router.post("/", [
     check("clave no valida").notEmpty().trim()
 ], httplogin.postLogin)
 
+router.put('/:id', httplogin.putLogin)
+
 export default router
