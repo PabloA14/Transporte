@@ -50,23 +50,23 @@ const httpChoferes = {
         const id = req.params.id
         const { estado } = req.body
         //patch
-    
+
         try {
-          const chofer = await Chofer.findById(id)
-    
-          if (chofer) {
-            chofer.estado = estado
-            await chofer.save()
-            res.json(chofer)
-            
-          } else {
-            console.log("Id no encontrado");
-          }
-    
+            const chofer = await Chofer.findById(id)
+
+            if (chofer) {
+                chofer.estado = estado
+                await chofer.save()
+                res.json(chofer)
+
+            } else {
+                console.log("Id no encontrado");
+            }
+
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      }
+    }
 };
 
 export default httpChoferes;

@@ -15,4 +15,7 @@ router.post("/", [
     check("capacidad", "la capacidad es obligatoria").notEmpty().trim(),
 ], httpVehiculos.postVehiculo)
 
+router.put("/:id", httpVehiculos.putVehiculo)
+router.patch("/:id", httpVehiculos.patchVehiculo);
+
 export default router

@@ -19,6 +19,8 @@ router.post("/", [
 ], httpEmpleados.postEmpleado)
 
 router.put('/:id', httpEmpleados.putEmpleado);
+router.patch('/:id',httpEmpleados.patchEmpleado)
+
 
 
 

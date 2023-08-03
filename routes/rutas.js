@@ -15,6 +15,8 @@ router.post("/", [
 
 router.get("/:nombre", httpRutas.getNombreRuta);
 router.put('/:id', httpRutas.putRuta);
+router.patch('/:id', httpRutas.patchRuta);
+
 
 
 export default router
