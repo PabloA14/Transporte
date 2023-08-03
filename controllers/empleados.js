@@ -66,6 +66,26 @@ const httpEmpleados = {
             res.status(500).json({ error: 'Error al actualizar el empleado.' });
         }
     },
+    patchEmpleado: async (req, res) => {
+        const id = req.params.id
+        const { estado } = req.body
+
+        try {
+            const empleado = await Empleado.findById(id)
+
+            if (empleado) {
+                empleado.estado = estado
+                await empleado.save()
+                res.json(empleado)
+
+            } else {
+                console.log("Id no encontrado");
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 }
 

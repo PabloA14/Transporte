@@ -6,7 +6,7 @@ const httpTiketes = {
         const tikete = await Tikete.find()
         .populate("cedula_pasajero")
         .populate("empleado")
-        .populate("veiculo_matericula")
+        .populate("vehiculo_matricula")
         .populate("ruta")
         res.json({ tikete })
     },

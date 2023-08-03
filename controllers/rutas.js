@@ -44,6 +44,26 @@ const httpRutas = {
             res.status(500).json({ error: 'Error al actualizar la ruta.' });
         }
     },
+    patchRuta: async (req, res) => {
+        const id = req.params.id
+        const { estado } = req.body
+
+        try {
+            const ruta = await Ruta.findById(id)
+
+            if (ruta) {
+                ruta.estado = estado
+                await ruta.save()
+                res.json(ruta)
+
+            } else {
+                console.log("Id no encontrado");
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 }
 

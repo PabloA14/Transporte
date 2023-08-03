@@ -31,7 +31,6 @@ const httpPasajeros = {
         await pasajero.save()
         res.json({ pasajero })
     },
-
     putPasajero: async (req, res) => {
         const pasajeroId = req.params.id;
         const newData = req.body;
@@ -52,6 +51,26 @@ const httpPasajeros = {
             res.status(500).json({ error: 'Error al actualizar el pasajero.' });
         }
     },
+    patchPasajero: async (req, res) => {
+        const id = req.params.id
+        const { estado } = req.body
+
+        try {
+            const pasajero = await Pasajero.findById(id)
+
+            if (pasajero) {
+                pasajero.estado = estado
+                await pasajero.save()
+                res.json(pasajero)
+
+            } else {
+                console.log("Id no encontrado");
+            }
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
 
 export default httpPasajeros
