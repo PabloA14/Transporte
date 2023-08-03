@@ -5,6 +5,7 @@ const httpRutas = {
         const ruta = await Ruta.find()
         res.json({ ruta })
     },
+
     getNombreRuta: async (req, res) => {
         try {
             const nombreBuscado = req.params.nombre;
@@ -18,12 +19,14 @@ const httpRutas = {
             res.status(500).json({ mensaje: 'Hubo un error al buscar la ruta.' });
         }
     },
+
     postRuta: async (req, res) => {
         const { nombre, origen, destino, valor } = req.body
         const ruta = await Ruta({ nombre, origen, destino, valor })
         await ruta.save()
         res.json({ ruta })
     },
+
     putRuta: async (req, res) => {
         const rutaId = req.params.id;
         const newData = req.body;
@@ -44,6 +47,7 @@ const httpRutas = {
             res.status(500).json({ error: 'Error al actualizar la ruta.' });
         }
     },
+
     patchRuta: async (req, res) => {
         const id = req.params.id
         const { estado } = req.body

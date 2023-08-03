@@ -11,14 +11,14 @@ const httpTiketes = {
         res.json({ tikete })
     },
 
-    getTikete: async (req, res) => {
+    getnumero: async (req, res) => {
         try {
-            consttiketeBuscada = req.params.ruta;
-            consttiketeEncontrado = await Tikete.findOne({ nombre: tiketeBuscada });
-            if (!rutaEncontrado) {
-                return res.status(404).json({ mensaje: 'No se encontró el tikete con la cédula proporcionada.' });
+            const tiketeBuscada = req.params.ruta;
+            const tiketeEncontrado = await Tikete.findOne({ numero: tiketeBuscada });
+            if (!tiketeEncontrado) {
+                return res.status(404).json({ mensaje: 'No se encontró el tikete con el numero proporcionada.' });
             }
-            res.json(rutaEncontrado);
+            res.json(tiketeEncontrado);
         } catch (error) {
             console.error('Error al buscar eltikete:', error);
             res.status(500).json({ mensaje: 'Hubo un error al buscar eltikete.' })
@@ -26,8 +26,8 @@ const httpTiketes = {
     },
 
     postTikete: async (req, res) => {
-        const { numero, veiculo_matericula, empleado, cedula_pasajero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta, estado } = req.body
-        const tikete = await Tikete({ numero, veiculo_matericula, empleado, cedula_pasajero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta, estado })
+        const { numero, vehiculo_matricula, empleado, cedula_pasajero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta, estado } = req.body
+        const tikete = await Tikete({ numero, vehiculo_matricula, empleado, cedula_pasajero, num_acientos, fecha_salida, hora_salida, tipo_pago, ruta, estado })
         await tikete.save()
         res.json({ tikete })
     },

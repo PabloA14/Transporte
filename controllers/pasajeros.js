@@ -31,6 +31,7 @@ const httpPasajeros = {
         await pasajero.save()
         res.json({ pasajero })
     },
+    
     putPasajero: async (req, res) => {
         const pasajeroId = req.params.id;
         const newData = req.body;
