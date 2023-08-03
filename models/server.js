@@ -5,6 +5,7 @@ import pasajeros from "../routes/pasajeros.js"
 import rutas from "../routes/rutas.js"
 import vehiculos from "../routes/vehiculos.js"
 import tiketes from "../routes/tiketes.js"
+import logins from "../routes/logins.js"
 import mongoose from "mongoose"
 import cors from "cors"
 
@@ -24,6 +25,7 @@ class Server {
         this.app.use('/api/vehiculos', vehiculos)
         this.app.use('/api/rutas', rutas)
         this.app.use('/api/tiketes', tiketes)
+        this.app.use('/api/logins', logins)
     }
 
     middlewares() {

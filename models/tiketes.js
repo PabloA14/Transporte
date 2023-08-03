@@ -15,17 +15,3 @@ const tiketeSchema = new mongoose.Schema({
 })
 
 export default mongoose.model("Tikete", tiketeSchema)
-
-//guet
-
-// guet parra ver todos los tikets
-// guet para ver un tiket
-
-
-// post
-
-// post para generar una tiket
-
-// put
-
-// put para actualizar el estado de un tiket

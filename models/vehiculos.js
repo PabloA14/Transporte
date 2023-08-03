@@ -12,15 +12,3 @@ const vehiculoSchema = new mongoose.Schema({
 })
 
 export default mongoose.model("Vehiculo", vehiculoSchema)
-
-// get
-
-// get para mostrar todos los vehiculos
-// get para buscar 1 vehicilo
-
-
-// post
-
-// post para registrar un vehiculo 
-
-

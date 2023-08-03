@@ -11,18 +11,3 @@ const rutasSchema = new mongoose.Schema({
 
 export default mongoose.model("Ruta", rutasSchema)
 
-// guet
-
-// guet para todas las rutas
-// guet para enlistar una ruta
-
-
-// post
-
-// post para registrar una ruta
-
-
-// put
-
-// put para actualizar el estado de una ruta
-
