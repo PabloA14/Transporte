@@ -1,4 +1,5 @@
 import Login from "../models/logins.js";
+import bcrypt from "bcrypt"
 
 const httplogin = {
 
@@ -9,7 +10,11 @@ const httplogin = {
 
     postLogin: async (req, res) => {
         const { usuario, clave } = req.body
-        const login = await Login({ usuario, clave })
+
+        const salt = 10;
+        const hashedClave = await bcrypt.hash(clave, salt);
+
+        const login = await Login({ usuario, clave: hashedClave })
         await login.save()
         res.json({ login })
     },
