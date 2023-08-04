@@ -12,5 +12,6 @@ router.post("/", [
 ], httplogin.postLogin)
 
 router.put('/:id', httplogin.putLogin)
+router.post('/login', httplogin.postSesion);
 
 export default router

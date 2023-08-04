@@ -37,27 +37,23 @@ const httpEmpleados = {
         }
     },
     putEmpleado: async (req, res) => {
-        const empleadoId = req.params.id; // Obtener el ID del empleado desde los parámetros de la solicitud
-        const newData = req.body; // Obtener los datos actualizados desde el cuerpo de la solicitud
+        const empleadoId = req.params.id; 
+        const newData = req.body; 
 
         try {
-            // Verificar si el empleado existe en la base de datos
             const empleadoExistente = await Empleado.findById(empleadoId);
             if (!empleadoExistente) {
                 return res.status(404).json({ mensaje: 'No se encontró el empleado con el ID proporcionado.' });
             }
 
-            // Si se proporcionó una nueva contraseña, hashearla antes de actualizarla
             if (newData.clave) {
                 const salt = 10;
                 const hashedClave = await bcrypt.hash(newData.clave, salt);
                 newData.clave = hashedClave;
             }
 
-            // Actualizar los datos del empleado con los nuevos datos proporcionados
             await Empleado.findByIdAndUpdate(empleadoId, newData);
 
-            // Obtener el empleado actualizado
             const empleadoActualizado = await Empleado.findById(empleadoId);
             res.json({ empleado: empleadoActualizado });
 

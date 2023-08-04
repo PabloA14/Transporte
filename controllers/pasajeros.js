@@ -10,16 +10,13 @@ const httpPasajeros = {
     getCedula: async (req, res) => {
         try {
             const cedulaBuscada = req.params.cedula;
-            // Realiza la búsqueda del pasajero en la base de datos utilizando el modelo
+
             const pasajeroEncontrado = await Pasajero.findOne({ cedula: cedulaBuscada });
             if (!pasajeroEncontrado) {
-                // Si no se encontró el pasajero con la cédula dada, devolver un mensaje de error o un estado 404 Not Found.
                 return res.status(404).json({ mensaje: 'No se encontró el pasajero con la cédula proporcionada.' });
             }
-            // Si se encontró el pasajero, devuelve la información del mismo en la respuesta.
             res.json(pasajeroEncontrado);
         } catch (error) {
-            // Manejo de errores en caso de que algo falle.
             console.error('Error al buscar el pasajero:', error);
             res.status(500).json({ mensaje: 'Hubo un error al buscar el pasajero.' });
         }
