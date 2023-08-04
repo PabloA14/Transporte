@@ -7,7 +7,7 @@ const router = Router()
 router.get("/", httplogin.getLogin)
 
 router.post("/", [
-    check("usuaruio no valido").notEmpty().trim(),
+    check("usuario no valido").notEmpty().trim(),
     check("clave no valida").notEmpty().trim()
 ], httplogin.postLogin)
 
