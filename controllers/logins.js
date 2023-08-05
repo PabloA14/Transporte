@@ -8,7 +8,6 @@ const httplogin = {
         const login = await Login.find()
         res.json({ login })
     },
-
     postLogin: async (req, res) => {
         const { usuario, clave } = req.body
 
@@ -19,7 +18,6 @@ const httplogin = {
         await login.save()
         res.json({ login })
     },
-
     postSesion: async (req, res) => {
         const { usuario, clave } = req.body;
 
@@ -76,7 +74,7 @@ const httplogin = {
             console.error(error);
             res.status(500).json({ error: 'Error al actualizar el Usuario o contraseña' });
         }
-    }
+    },
 }
 
 export default httplogin
