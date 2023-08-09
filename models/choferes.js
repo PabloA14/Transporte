@@ -6,7 +6,7 @@ const choferSchema = new mongoose.Schema({
     telefono: { type: String, required: true },
     numero_licencia: { type: String, required: true },
     categoria_licencia: { type: String, required: true },
-    fecha_vencimiento: { type: Date, required: true },
+    fecha_vencimiento: { type: String, required: true },
     experiencia: { type: String, required: true },
     estado: { type: Number, default: 1, required: true },
     createdAt: { type: Date, default: Date.now },
