@@ -8,6 +8,8 @@ const httpTiketes = {
             .populate("empleado")
             .populate("vehiculo_matricula")
             .populate("ruta")
+            .populate("hora_salida","hora_salida")
+            
         res.json({ tikete })
     },
 

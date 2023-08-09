@@ -7,7 +7,7 @@ const tiketeSchema = new mongoose.Schema({
     cedula_pasajero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pasajero', required: true },
     num_acientos: { type: Number, default: 0 },
     fecha_salida: { type: Date, required: true },
-    hora_salida: { type: Date, required: true },
+    hora_salida: { type: mongoose.Schema.Types.ObjectId, ref: 'Ruta', required: true },
     tipo_pago: { type: String, required: false },
     ruta: { type: mongoose.Schema.Types.ObjectId, ref: 'Ruta', required: true },
     estado: { type: Number, default: 1, required: true },
