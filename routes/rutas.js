@@ -8,6 +8,7 @@ const router = Router()
 router.get("/", httpRutas.getRutas)
 
 router.post("/", [
+    check("codigoRuta", "el codigoRuta es obligatorio").trim().not().isEmpty(),
     check("nombre", "el nombre es obligatorio").trim().not().isEmpty(),
     check("origen", "el origen es obligatorio").trim().not().isEmpty(),
     check("destino", "el destino es obligatorio").trim().not().isEmpty(),
@@ -21,6 +22,7 @@ router.get("/:nombre", httpRutas.getNombreRuta);
 
 
 router.put('/:id', [
+    check("codigoRuta", "el codigoRuta es obligatorio").trim().not().isEmpty(),
     check("nombre", "el nombre es obligatorio").trim().not().isEmpty(),
     check("origen", "el origen es obligatorio").trim().not().isEmpty(),
     check("destino", "el destino es obligatorio").trim().not().isEmpty(),
