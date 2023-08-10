@@ -10,6 +10,7 @@ router.get("/:matricula", httpVehiculos.getMatricula);
 
 router.post("/", [
     check("matricula", "la matricula es obligatoria").trim().not().isEmpty(),
+    check("matricula", "la matricula no valida").trim().isLength({ max: 6 }),
     check("tipo", "el tipo es obligatorio").trim().not().isEmpty(),
     check("marca", "la marca es obligatoria").trim().not().isEmpty(),
     check("modelo", "el modelo es obligatorio").trim().not().isEmpty(),
@@ -19,6 +20,7 @@ router.post("/", [
 
 router.put("/:id", [
     check("matricula", "la matricula es obligatoria").trim().not().isEmpty(),
+    check("matricula", "la matricula no valida").trim().isLength({ max: 6 }),
     check("tipo", "el tipo es obligatorio").trim().not().isEmpty(),
     check("marca", "la marca es obligatoria").trim().not().isEmpty(),
     check("modelo", "el modelo es obligatorio").trim().not().isEmpty(),
