@@ -8,14 +8,13 @@ const httpTiketes = {
             .populate("empleado")
             .populate("vehiculo_matricula")
             .populate("ruta")
-            .populate("hora_salida","hora_salida")
             
         res.json({ tikete })
     },
 
     getnumero: async (req, res) => {
         try {
-            const tiketeBuscada = req.params.ruta;
+            const tiketeBuscada = req.params.numero;
             const tiketeEncontrado = await Tikete.findOne({ numero: tiketeBuscada });
             if (!tiketeEncontrado) {
                 return res.status(404).json({ mensaje: 'No se encontró el tikete con el numero proporcionada.' });

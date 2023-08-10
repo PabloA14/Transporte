@@ -24,6 +24,7 @@ const httplogin = {
         try {
             // Buscar el usuario en la base de datos por nombre de usuario 
             const usuarioEncontrado = await Login.findOne({ usuario });
+            console.log(usuarioEncontrado);
 
             if (!usuarioEncontrado) {
                 return res.status(401).json({ mensaje: 'Credenciales inválidas' });
@@ -42,7 +43,7 @@ const httplogin = {
                 { expiresIn: '1h' }
             );
 
-            res.json({ token });
+            res.json({token});
 
         } catch (error) {
             console.error(error);

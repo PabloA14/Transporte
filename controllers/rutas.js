@@ -15,7 +15,7 @@ const httpRutas = {
             }
             res.json(rutaEncontrada);
         } catch (error) {
-            console.error('Error al buscar el chofer:', error);
+            console.error('Error al buscar la ruta:', error);
             res.status(500).json({ mensaje: 'Hubo un error al buscar la ruta.' });
         }
     },
