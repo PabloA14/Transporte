@@ -17,7 +17,15 @@ router.post("/", [
     validarCampos
 ], httpVehiculos.postVehiculo)
 
-router.put("/:id", httpVehiculos.putVehiculo)
+router.put("/:id", [
+    check("matricula", "la matricula es obligatoria").trim().not().isEmpty(),
+    check("tipo", "el tipo es obligatorio").trim().not().isEmpty(),
+    check("marca", "la marca es obligatoria").trim().not().isEmpty(),
+    check("modelo", "el modelo es obligatorio").trim().not().isEmpty(),
+    check("capacidad", "la capacidad es obligatoria").trim().not().isEmpty(),
+    validarCampos
+], httpVehiculos.putVehiculo)
+
 router.patch("/:id", httpVehiculos.patchVehiculo);
 
 export default router

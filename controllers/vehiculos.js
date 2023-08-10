@@ -30,6 +30,7 @@ const httpVehiculos = {
         await vehiculo.save()
         res.json({ vehiculo })
     },
+    
     patchVehiculo: async (req, res) => {
         const id = req.params.id
         const { estado } = req.body
@@ -49,6 +50,7 @@ const httpVehiculos = {
             console.error(error);
         }
     },
+
     putVehiculo: async (req, res) => {
         const vehiculoId = req.params.id;
         const newData = req.body;
