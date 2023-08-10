@@ -10,29 +10,28 @@ router.get("/:cedula", httpEmpleados.getCedulaEmpleado)
 
 
 router.post("/", [
-    check("cedula", "la cédula es obligatoria").trim().not().isEmpty(),
-    check("cedula", "cedula máximo 10 caracteres").trim().isLength({ max: 10 }),
-    check("nombre", "el nombre es obligatorio").trim().not().isEmpty(),
-    check("telefono", "el telefono es obligatorio").trim().not().isEmpty(),
-    check("telefono", "telefono de máximo 12 caracteres").trim().isLength({ max: 12 }),
-    check("username", "el nombre de usuario es obligatorio").trim().not().isEmpty(),
-    check("clave", "la clave es obligatoria").trim().not().isEmpty(),
+    check("cedula", "La cédula es obligatoria").trim().not().isEmpty(),
+    check("cedula", "Cédula máximo 10 caracteres").trim().isLength({ max: 10 }),
+    check("nombre", "El nombre es obligatorio").trim().not().isEmpty(),
+    check("telefono", "El teléfono es obligatorio").trim().not().isEmpty(),
+    check("telefono", "Teléfono de máximo 12 caracteres").trim().isLength({ max: 12 }),
+    check("username", "El nombre de usuario es obligatorio").trim().not().isEmpty(),
+    check("clave", "La clave es obligatoria").trim().not().isEmpty(),
     validarCampos
 ], httpEmpleados.postEmpleado)
 
 router.put('/:id', [
-    check("cedula", "la cédula es obligatoria").trim().not().isEmpty(),
-    check("cedula", "cedula máximo 10 caracteres").trim().isLength({ max: 10 }),
-    check("nombre", "el nombre es obligatorio").trim().not().isEmpty(),
-    check("telefono", "el telefono es obligatorio").trim().not().isEmpty(),
-    check("telefono", "telefono de máximo 12 caracteres").trim().isLength({ max: 12 }),
-    check("username", "el nombre de usuario es obligatorio").trim().not().isEmpty(),
-    check("clave", "la clave es obligatoria").trim().not().isEmpty(),
+    check("cedula", "La cédula es obligatoria").trim().not().isEmpty(),
+    check("cedula", "Cédula máximo 10 caracteres").trim().isLength({ max: 10 }),
+    check("nombre", "El nombre es obligatorio").trim().not().isEmpty(),
+    check("telefono", "El teléfono es obligatorio").trim().not().isEmpty(),
+    check("telefono", "Teléfono de máximo 12 caracteres").trim().isLength({ max: 12 }),
+    check("username", "El nombre de usuario es obligatorio").trim().not().isEmpty(),
+    check("clave", "La clave es obligatoria").trim().not().isEmpty(),
     validarCampos
 ], httpEmpleados.putEmpleado);
+
 router.patch('/:id', httpEmpleados.patchEmpleado)
-
-
 
 
 export default router
