@@ -30,6 +30,7 @@ router.put('/:id', [
     check("clave", "la clave es obligatoria").trim().not().isEmpty(),
     validarCampos
 ], httpEmpleados.putEmpleado);
+
 router.patch('/:id', httpEmpleados.patchEmpleado)
 
 
