@@ -15,8 +15,8 @@ router.post("/", [
 router.put('/:id', httplogin.putLogin)
 
 router.post('/login', [
-    check("usuario", "Ingrese el usuario").not().isEmpty(),
-    check("clave","Ingrese la contraseña").not().isEmpty(),
+    check("usuario", "Ingrese el usuario").trim().not().isEmpty(),
+    check("clave","Ingrese la contraseña").trim().not().isEmpty(),
     validarCampos
 ], httplogin.postSesion);
 
