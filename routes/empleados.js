@@ -8,7 +8,6 @@ const router = Router()
 router.get("/", httpEmpleados.getEmpleados)
 router.get("/:cedula", httpEmpleados.getCedulaEmpleado)
 
-
 router.post("/", [
     check("cedula", "La cédula es obligatoria").trim().not().isEmpty(),
     check("cedula", "Cédula máximo 10 caracteres").trim().isLength({ max: 10 }),
