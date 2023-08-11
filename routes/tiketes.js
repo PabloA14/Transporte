@@ -12,19 +12,21 @@ router.post("/", [
     check("num_acientos", "El dnumero de acientos es obligatorio").trim().not().isEmpty(),
     check("fecha_salida", "La fecha es obligatoria").trim().not().isEmpty(),
     check("tipo_pago", "El tipo de pago es obligatorio").trim().not().isEmpty(),
-    check("ruta", "Las ruta es obligatoria").trim().not().isEmpty(),
     validarCampos
 ], httpTiketes.postTikete)
 
-router.get("/:numero", httpTiketes.getnumero);
+router.get ("/a/:actulizar", httpTiketes.getRenovarTicket)
+
+router.get("/n/:numero", httpTiketes.getnumero);
 
 router.put('/:id', [
     check("numero", "el numero es obligatorio").trim().not().isEmpty(),
     check("num_acientos", "El dnumero de acientos es obligatorio").trim().not().isEmpty(),
     check("fecha_salida", "La fecha es obligatoria").trim().not().isEmpty(),
     check("tipo_pago", "El tipo de pago es obligatorio").trim().not().isEmpty(),
-    check("ruta", "Las ruta es obligatoria").trim().not().isEmpty(),
     validarCampos
 ], httpTiketes.puttikete)
+
+
 
 export default router
