@@ -11,7 +11,6 @@ router.post("/", [
     check("numero", "el numero es obligatorio").trim().not().isEmpty(),
     check("num_acientos", "El dnumero de acientos es obligatorio").trim().not().isEmpty(),
     check("fecha_salida", "La fecha es obligatoria").trim().not().isEmpty(),
-    check("hora_salida", "La hora es obligatoria").trim().not().isEmpty(),
     check("tipo_pago", "El tipo de pago es obligatorio").trim().not().isEmpty(),
     check("ruta", "Las ruta es obligatoria").trim().not().isEmpty(),
     validarCampos
@@ -23,7 +22,6 @@ router.put('/:id', [
     check("numero", "el numero es obligatorio").trim().not().isEmpty(),
     check("num_acientos", "El dnumero de acientos es obligatorio").trim().not().isEmpty(),
     check("fecha_salida", "La fecha es obligatoria").trim().not().isEmpty(),
-    check("hora_salida", "La hora es obligatoria").trim().not().isEmpty(),
     check("tipo_pago", "El tipo de pago es obligatorio").trim().not().isEmpty(),
     check("ruta", "Las ruta es obligatoria").trim().not().isEmpty(),
     validarCampos
