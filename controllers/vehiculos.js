@@ -25,32 +25,11 @@ const httpVehiculos = {
         }
     },
     postVehiculo: async (req, res) => {
-        const { matricula, chofer_id, tipo, marca, modelo, capacidad, estado } = req.body
-        const vehiculo = await Vehiculo({ matricula, chofer_id, tipo, marca, modelo, capacidad, estado })
+        const { matricula, chofer_id, tipo, marca, modelo, capacidad } = req.body
+        const vehiculo = await Vehiculo({ matricula, chofer_id, tipo, marca, modelo, capacidad })
         await vehiculo.save()
         res.json({ vehiculo })
     },
-    
-    patchVehiculo: async (req, res) => {
-        const id = req.params.id
-        const { estado } = req.body
-
-        try {
-            const vehiculo = await Vehiculo.findById(id)
-
-            if (vehiculo) {
-                vehiculo.estado = estado
-                await vehiculo.save()
-                res.json(vehiculo)
-            } else {
-                console.log("Id no encontrado");
-            }
-
-        } catch (error) {
-            console.error(error);
-        }
-    },
-
     putVehiculo: async (req, res) => {
         const vehiculoId = req.params.id;
         const newData = req.body;
@@ -69,6 +48,25 @@ const httpVehiculos = {
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Error al actualizar el vehículo.' });
+        }
+    },
+    patchVehiculo: async (req, res) => {
+        const id = req.params.id
+        const { estado } = req.body
+
+        try {
+            const vehiculo = await Vehiculo.findById(id)
+
+            if (vehiculo) {
+                vehiculo.estado = estado
+                await vehiculo.save()
+                res.json(vehiculo)
+            } else {
+                console.log("Id no encontrado");
+            }
+
+        } catch (error) {
+            console.error(error);
         }
     }
 }

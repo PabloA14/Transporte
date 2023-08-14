@@ -8,22 +8,22 @@ const router = Router()
 router.get("/", httpPasajeros.getPasajeros)
 
 router.post("/", [
-    check("cedula", "la cédula es obligatoria").trim().not().isEmpty(),
-    check("cedula", "cedula máximo 10 caracteres").trim().isLength({ max: 10 }),
-    check("nombre", "el nombre es obligatorio").trim().not().isEmpty(),
-    check("telefono", "el telefono es obligatorio").trim().not().isEmpty(),
-    check("telefono", "telefono de máximo 12 caracteres").trim().isLength({ max: 12 }),
+    check("cedula", "La cédula es obligatoria").trim().not().isEmpty(),
+    check("cedula", "Cédula de máximo 10 caracteres").trim().isLength({ max: 10 }),
+    check("nombre", "El nombre es obligatorio").trim().not().isEmpty(),
+    check("telefono", "El telefono es obligatorio").trim().not().isEmpty(),
+    check("telefono", "Teléfono de máximo 12 caracteres").trim().isLength({ max: 12 }),
     validarCampos
 ], httpPasajeros.postPasajero)
 
 router.get("/:cedula", httpPasajeros.getCedula);
 
 router.put('/:id', [
-    check("cedula", "la cédula es obligatoria").trim().not().isEmpty(),
-    check("cedula", "cedula máximo 10 caracteres").trim().isLength({ max: 10 }),
-    check("nombre", "el nombre es obligatorio").trim().not().isEmpty(),
-    check("telefono", "el telefono es obligatorio").trim().not().isEmpty(),
-    check("telefono", "telefono de máximo 12 caracteres").trim().isLength({ max: 12 }),
+    check("cedula", "La cédula es obligatoria").trim().not().isEmpty(),
+    check("cedula", "Cédula de máximo 10 caracteres").trim().isLength({ max: 10 }),
+    check("nombre", "El nombre es obligatorio").trim().not().isEmpty(),
+    check("telefono", "El telefono es obligatorio").trim().not().isEmpty(),
+    check("telefono", "Teléfono de máximo 12 caracteres").trim().isLength({ max: 12 }),
     validarCampos
 ], httpPasajeros.putPasajero);
 

@@ -1,4 +1,5 @@
 import Tikete from "../models/tiketes.js"
+import mongoose from "mongoose";
 
 const httpTiketes = {
 
@@ -27,8 +28,9 @@ const httpTiketes = {
     },
 
     postTikete: async (req, res) => {
-        const { numero, vehiculo_matricula, empleado, cedula_pasajero, num_acientos, fecha_salida, tipo_pago, ruta } = req.body
-        const tikete = await Tikete({ numero, vehiculo_matricula, empleado, cedula_pasajero, num_acientos, fecha_salida, tipo_pago, ruta })
+        const { numero, vehiculo_matricula, empleado, cedula_pasajero, num_acientos, fecha_salida, tipo_pago, ruta, estado } = req.body
+
+        const tikete = await Tikete({ numero, vehiculo_matricula, empleado, cedula_pasajero, num_acientos, fecha_salida, tipo_pago, ruta, estado })
         await tikete.save()
         res.json({ tikete })
     },
@@ -63,7 +65,7 @@ const httpTiketes = {
                     { vehiculo_matricula: vehiculo },
 
                 ]
-            }).populate("ruta")     
+            }).populate("ruta")
                 .populate("vehiculo")
             let puestos = []
 

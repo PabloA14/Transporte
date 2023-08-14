@@ -9,22 +9,23 @@ router.get("/", httpVehiculos.getVehiculos)
 router.get("/:matricula", httpVehiculos.getMatricula);
 
 router.post("/", [
-    check("matricula", "la matricula es obligatoria").trim().not().isEmpty(),
-    check("matricula", "la matricula no valida").trim().isLength({ max: 6 }),
-    check("tipo", "el tipo es obligatorio").trim().not().isEmpty(),
-    check("marca", "la marca es obligatoria").trim().not().isEmpty(),
-    check("modelo", "el modelo es obligatorio").trim().not().isEmpty(),
-    check("capacidad", "la capacidad es obligatoria").trim().not().isEmpty(),
+    check("matricula", "La matrícula es obligatoria").trim().not().isEmpty(),
+    check("matricula", "La matrícula no valida").trim().isLength({ max: 10 }),
+    check("chofer_id", "El conductor es obligatorio").trim().not().isEmpty(),
+    check("tipo", "El tipo es obligatorio").trim().not().isEmpty(),
+    check("marca", "La marca es obligatoria").trim().not().isEmpty(),
+    check("modelo", "El modelo es obligatorio").trim().not().isEmpty(),
+    check("capacidad", "La capacidad es obligatoria").trim().not().isEmpty(),
     validarCampos
 ], httpVehiculos.postVehiculo)
 
 router.put("/:id", [
-    check("matricula", "la matricula es obligatoria").trim().not().isEmpty(),
-    check("matricula", "la matricula no valida").trim().isLength({ max: 6 }),
-    check("tipo", "el tipo es obligatorio").trim().not().isEmpty(),
-    check("marca", "la marca es obligatoria").trim().not().isEmpty(),
-    check("modelo", "el modelo es obligatorio").trim().not().isEmpty(),
-    check("capacidad", "la capacidad es obligatoria").trim().not().isEmpty(),
+    check("matricula", "La matrícula es obligatoria").trim().not().isEmpty(),
+    check("matricula", "La matrícula no valida").trim().isLength({ max: 10 }),
+    check("tipo", "El tipo es obligatorio").trim().not().isEmpty(),
+    check("marca", "La marca es obligatoria").trim().not().isEmpty(),
+    check("modelo", "El modelo es obligatorio").trim().not().isEmpty(),
+    check("capacidad", "La capacidad es obligatoria").trim().not().isEmpty(),
     validarCampos
 ], httpVehiculos.putVehiculo)
 
