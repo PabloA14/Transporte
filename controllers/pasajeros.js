@@ -13,29 +13,46 @@ const httpPasajeros = {
 
             const pasajeroEncontrado = await Pasajero.findOne({ cedula: cedulaBuscada });
             if (!pasajeroEncontrado) {
-                return res.status(404).json({ mensaje: 'No se encontró el pasajero con la cédula proporcionada.' });
+                return res.status(404).json({ mensaje: 'No se encontró el cliente con la cédula proporcionada.' });
             }
             res.json(pasajeroEncontrado);
         } catch (error) {
             console.error('Error al buscar el pasajero:', error);
-            res.status(500).json({ mensaje: 'Hubo un error al buscar el pasajero.' });
+            res.status(500).json({ mensaje: 'Hubo un error al buscar el cliente.' });
         }
     },
 
     postPasajero: async (req, res) => {
-        const { cedula, nombre, telefono } = req.body
-        const pasajero = await Pasajero({ cedula, nombre, telefono })
-        await pasajero.save()
-        res.json({ pasajero })
+        const { cedula, nombre, telefono } = req.body;
+
+        try {
+            const pasajeroExistente = await Pasajero.findOne({ cedula });
+
+            if (pasajeroExistente) {
+                return res.status(400).json({ mensaje: 'La cédula ya está registrada.' });
+            }
+
+            const pasajero = new Pasajero({ cedula, nombre, telefono });
+            await pasajero.save();
+            res.json({ pasajero });
+        } catch (error) {
+            console.error('Error al agregar el cliente:', error);
+            res.status(500).json({ mensaje: 'Hubo un error al agregar el cliente.' });
+        }
     },
-    
     putPasajero: async (req, res) => {
         const pasajeroId = req.params.id;
         const newData = req.body;
 
         try {
-            const pasajeroExistente = await Pasajero.findById(pasajeroId);
-            if (!pasajeroExistente) {
+            const pasajeroExistente = await Pasajero.findOne({ cedula: newData.cedula });
+
+            if (pasajeroExistente && pasajeroExistente._id.toString() !== pasajeroId) {
+                return res.status(400).json({ mensaje: 'La cédula ya está registrada.' });
+            }
+
+            const pasajeroEncontrado = await Pasajero.findById(pasajeroId);
+            if (!pasajeroEncontrado) {
                 return res.status(404).json({ mensaje: 'No se encontró el pasajero con el ID proporcionado.' });
             }
 

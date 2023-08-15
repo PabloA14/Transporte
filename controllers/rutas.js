@@ -11,7 +11,7 @@ const httpRutas = {
             const nombreBuscado = req.params.nombre;
             const rutaEncontrada = await Ruta.findOne({ nombre: nombreBuscado });
             if (!rutaEncontrada) {
-                return res.status(404).json({ mensaje: 'No se encontró la ruta con el nombre proporcionada.' });
+                return res.status(404).json({ mensaje: 'No se encontró la ruta con el nombre proporcionado.' });
             }
             res.json(rutaEncontrada);
         } catch (error) {
@@ -22,9 +22,23 @@ const httpRutas = {
 
     postRuta: async (req, res) => {
         const { codigoRuta, nombre, origen, destino, valor, hora_salida } = req.body
-        const ruta = await Ruta({ codigoRuta, nombre, origen, destino, valor, hora_salida })
-        await ruta.save()
-        res.json({ ruta })
+
+        try {
+            const rutaExistente = await Ruta.findOne({ codigoRuta })
+
+            if (rutaExistente) {
+                return res.status(400).json({ mensaje: 'El código ya está registrado.' });
+            }
+
+            const ruta = new Ruta({ codigoRuta, nombre, origen, destino, valor, hora_salida })
+            await ruta.save()
+            res.json({ ruta })
+
+        } catch (error) {
+            console.error('Error al agregar la ruta:', error);
+            res.status(500).json({ mensaje: 'Hubo un error al agregar la ruta.' });
+        }
+
     },
 
     putRuta: async (req, res) => {
@@ -32,8 +46,14 @@ const httpRutas = {
         const newData = req.body;
 
         try {
-            const rutaExistente = await Ruta.findById(rutaId);
-            if (!rutaExistente) {
+            const rutaExistente = await Ruta.findOne({  codigoRuta: newData.codigoRuta });
+
+            if (rutaExistente && rutaExistente._id.toString() !== rutaId) {
+                return res.status(400).json({ mensaje: 'El código ya está registrado.' });
+            }
+
+            const rutaEncontrada = await Ruta.findById(rutaId);
+            if (!rutaEncontrada) {
                 return res.status(404).json({ mensaje: 'No se encontró la ruta con el ID proporcionado.' });
             }
 

@@ -8,9 +8,21 @@ const httpChoferes = {
 
     postChofer: async (req, res) => {
         const { cedula, nombre, telefono, numero_licencia, categoria_licencia, fecha_vencimiento, experiencia } = req.body;
-        const chofer = await Chofer({ cedula, nombre, telefono, numero_licencia, categoria_licencia, fecha_vencimiento, experiencia });
-        await chofer.save();
-        res.json({ chofer });
+
+        try {
+            const choferExistente = await Chofer.findOne({ cedula })
+
+            if (choferExistente) {
+                return res.status(400).json({ mensaje: 'La cédula ya está registrada.' });
+            }
+
+            const chofer = new Chofer({ cedula, nombre, telefono, numero_licencia, categoria_licencia, fecha_vencimiento, experiencia });
+            await chofer.save();
+            res.json({ chofer });
+        }  catch (error) {
+            console.error('Error al agregar el conductor:', error);
+            res.status(500).json({ mensaje: 'Hubo un error al agregar el conductor.' });
+        }
     },
 
     getCedulaChofer: async (req, res) => {
@@ -18,12 +30,12 @@ const httpChoferes = {
             const cedulaBuscada = req.params.cedula;
             const choferEncontrado = await Chofer.findOne({ cedula: cedulaBuscada });
             if (!choferEncontrado) {
-                return res.status(404).json({ mensaje: 'No se encontró el chofer con la cédula proporcionada.' });
+                return res.status(404).json({ mensaje: 'No se encontró el conductor con la cédula proporcionada.' });
             }
             res.json(choferEncontrado);
         } catch (error) {
             console.error('Error al buscar el chofer:', error);
-            res.status(500).json({ mensaje: 'Hubo un error al buscar el chofer.' });
+            res.status(500).json({ mensaje: 'Hubo un error al buscar el conductor.' });
         }
     },
     putChofer: async (req, res) => {
@@ -31,8 +43,14 @@ const httpChoferes = {
         const newData = req.body;
 
         try {
-            const choferExistente = await Chofer.findById(choferId);
-            if (!choferExistente) {
+            const choferExistente = await Chofer.findOne({ cedula: newData.cedula });
+
+            if (choferExistente && choferExistente._id.toString() !== choferId) {
+                return res.status(400).json({ mensaje: 'La cédula ya está registrada.' });
+            }
+
+            const choferEncontrado = await Chofer.findById(choferId);
+            if (!choferEncontrado) {
                 return res.status(404).json({ mensaje: 'No se encontró el chofer con el ID proporcionado.' });
             }
 

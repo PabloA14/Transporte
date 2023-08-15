@@ -26,17 +26,36 @@ const httpVehiculos = {
     },
     postVehiculo: async (req, res) => {
         const { matricula, chofer_id, tipo, marca, modelo, capacidad } = req.body
-        const vehiculo = await Vehiculo({ matricula, chofer_id, tipo, marca, modelo, capacidad })
-        await vehiculo.save()
-        res.json({ vehiculo })
+
+        try {
+            const vehiculoExistente = await Vehiculo.findOne({ matricula })
+
+            if (vehiculoExistente) {
+                return res.status(400).json({ mensaje: 'La matrícula ya está registrada.' });
+            }
+
+            const vehiculo = new Vehiculo({ matricula, chofer_id, tipo, marca, modelo, capacidad })
+            await vehiculo.save()
+            res.json({ vehiculo })
+        } catch (error) {
+            console.error('Error al agregar el vehículo:', error);
+            res.status(500).json({ mensaje: 'Hubo un error al agregar el vehículo.' });
+        }
+
     },
     putVehiculo: async (req, res) => {
         const vehiculoId = req.params.id;
         const newData = req.body;
 
         try {
-            const vehiculoExistente = await Vehiculo.findById(vehiculoId);
-            if (!vehiculoExistente) {
+            const vehiculoExistente = await Vehiculo.findOne({  matricula: newData.matricula });
+
+            if (vehiculoExistente && vehiculoExistente._id.toString() !== vehiculoId) {
+                return res.status(400).json({ mensaje: 'La matrícula ya está registrada.' });
+            }
+
+            const vehiculoEncontrado = await Vehiculo.findById(vehiculoId);
+            if (!vehiculoEncontrado) {
                 return res.status(404).json({ mensaje: 'No se encontró el vehículo con el ID proporcionado.' });
             }
 

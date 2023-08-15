@@ -1,5 +1,4 @@
 import Tikete from "../models/tiketes.js"
-import mongoose from "mongoose";
 
 const httpTiketes = {
 

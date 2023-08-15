@@ -27,7 +27,13 @@ const httpEmpleados = {
             const salt = 10;
             const hashedClave = await bcrypt.hash(clave, salt);
 
-            const empleado = await Empleado({ cedula, nombre, telefono, username, clave: hashedClave });
+            const empleadoExistente = await Empleado.findOne({cedula})
+
+            if (empleadoExistente) {
+                return res.status(400).json({ mensaje: 'La cédula ya está registrada.' });
+            }
+
+            const empleado = new Empleado({ cedula, nombre, telefono, username, clave: hashedClave });
             await empleado.save();
             res.json({ empleado });
 
@@ -41,8 +47,14 @@ const httpEmpleados = {
         const newData = req.body; 
 
         try {
-            const empleadoExistente = await Empleado.findById(empleadoId);
-            if (!empleadoExistente) {
+            const empleadoExistente = await Empleado.findOne({ cedula: newData.cedula });
+
+            if (empleadoExistente && empleadoExistente._id.toString() !== empleadoId) {
+                return res.status(400).json({ mensaje: 'La cédula ya está registrada.' });
+            }
+
+            const empleadoEncontrado = await Empleado.findById(empleadoId);
+            if (!empleadoEncontrado) {
                 return res.status(404).json({ mensaje: 'No se encontró el empleado con el ID proporcionado.' });
             }
 
