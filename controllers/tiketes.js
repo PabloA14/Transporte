@@ -17,7 +17,7 @@ const httpTiketes = {
             const tiketeBuscada = req.params.numero;
             const tiketeEncontrado = await Tikete.findOne({ numero: tiketeBuscada });
             if (!tiketeEncontrado) {
-                return res.status(404).json({ mensaje: 'No se encontró el tikete con el numero proporcionado.' });
+                return res.status(404).json({ mensaje: 'No se encontró el tiquete con el numero proporcionado.' });
             }
             res.json(tiketeEncontrado);
         } catch (error) {

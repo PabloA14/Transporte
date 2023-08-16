@@ -17,7 +17,7 @@ router.post("/", [
 
 router.get ("/a/:actulizar", httpTiketes.getRenovarTicket)
 
-router.get("/n/:numero", httpTiketes.getnumero);
+router.get("/:numero", httpTiketes.getnumero);
 
 router.put('/:id', [
     check("numero", "el numero es obligatorio").trim().not().isEmpty(),
