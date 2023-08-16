@@ -5,19 +5,6 @@ import { validarCampos } from "../middlewares/validar_campos.js";
 
 const router = Router()
 
-router.get("/", httplogin.getLogin)
-
-router.post("/", [
-    check("usuario no valido").notEmpty().trim(),
-    check("clave no valida").notEmpty().trim()
-], httplogin.postLogin)
-
-router.put('/:id', httplogin.putLogin)
-
-router.post('/login', [
-    check("usuario", "Ingrese el usuario").trim().not().isEmpty(),
-    check("clave","Ingrese la contraseña").trim().not().isEmpty(),
-    validarCampos
-], httplogin.postSesion);
+router.post('/login', httplogin.postSesion);
 
 export default router
