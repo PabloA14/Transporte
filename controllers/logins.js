@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 
 const httplogin = {
 
-
     postSesion: async (req, res) => {
         const { username, clave } = req.body;
 
@@ -31,7 +30,7 @@ const httplogin = {
                 { expiresIn: '1h' }
             );
 
-            res.json({token});
+            res.json({ token, empleado: usuarioEncontrado });
 
         } catch (error) {
             console.error(error);

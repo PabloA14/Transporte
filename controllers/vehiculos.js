@@ -25,7 +25,7 @@ const httpVehiculos = {
         }
     },
     postVehiculo: async (req, res) => {
-        const { matricula, chofer_id, tipo, marca, modelo, capacidad } = req.body
+        const { matricula, numero, chofer_id, tipo, marca, modelo, capacidad } = req.body
 
         try {
             const vehiculoExistente = await Vehiculo.findOne({ matricula })
@@ -34,7 +34,13 @@ const httpVehiculos = {
                 return res.status(400).json({ mensaje: 'La matrícula ya está registrada.' });
             }
 
-            const vehiculo = new Vehiculo({ matricula, chofer_id, tipo, marca, modelo, capacidad })
+            const numeroExistente = await Vehiculo.findOne({ numero })
+
+            if (numeroExistente) {
+                return res.status(400).json({ mensaje: 'El número ya está registrado.' });
+            }
+
+            const vehiculo = new Vehiculo({ matricula, numero, chofer_id, tipo, marca, modelo, capacidad })
             await vehiculo.save()
             res.json({ vehiculo })
         } catch (error) {
@@ -48,10 +54,16 @@ const httpVehiculos = {
         const newData = req.body;
 
         try {
-            const vehiculoExistente = await Vehiculo.findOne({  matricula: newData.matricula });
+            const vehiculoExistente = await Vehiculo.findOne({ matricula: newData.matricula });
 
             if (vehiculoExistente && vehiculoExistente._id.toString() !== vehiculoId) {
                 return res.status(400).json({ mensaje: 'La matrícula ya está registrada.' });
+            }
+
+            const numeroExistente = await Vehiculo.findOne({ numero: newData.numero });
+
+            if (numeroExistente && numeroExistente._id.toString() !== vehiculoId) {
+                return res.status(400).json({ mensaje: 'El número ya está registrado.' });
             }
 
             const vehiculoEncontrado = await Vehiculo.findById(vehiculoId);

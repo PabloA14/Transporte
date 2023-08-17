@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const vehiculoSchema = new mongoose.Schema({
     matricula: { type: String, required: true },
+    numero: { type: String, required: true },
     chofer_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Chofer' },
     tipo: { type: String, required: false },
     marca: { type: String, required: false },
