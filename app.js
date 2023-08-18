@@ -3,4 +3,4 @@ import 'dotenv/config'
 
 const server =new Server
 
-server.conecarBaseDatos()
+server.escuchar()
