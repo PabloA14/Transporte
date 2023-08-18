@@ -3,7 +3,7 @@ import { Router } from "express"
 import { check } from "express-validator"
 import { validarCampos } from "../middlewares/validar_campos.js";
 
-const router = Router()
+const router = Router()    
 
 router.get("/", httpTiketes.getTiketes)
 
